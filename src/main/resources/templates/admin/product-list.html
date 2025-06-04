@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>상품 목록</title>
+</head>
+<body>
+
+<h1>상품 목록</h1>
+
+<a th:href="@{/admin/products/new}">상품 등록</a>
+
+<table border="1">
+	<thead>
+	<tr>
+		<th>ID</th>
+		<th>이름</th>
+		<th>가격</th>
+		<th>재고</th>
+		<th>활성 여부</th>
+		<th>등록일</th>
+		<th>관리</th>
+	</tr>
+	</thead>
+	<tbody>
+	<tr th:each="product : ${products}">
+		<td th:text="${product.id}">1</td>
+		<td>
+			<a th:href="@{'/admin/products/' + ${product.id}}"
+			   th:text="${product.name}"></a>
+		</td>
+		<td th:text="${product.price}">10000</td>
+		<td th:text="${product.stock}">50</td>
+		<td th:text="${product.isActive ? '활성' : '비활성'}"></td>
+		<td th:text="${#temporals.format(product.createdAt, 'yyyy-MM-dd')}"></td>
+		<td>
+			<a th:href="@{'/admin/products/' + ${product.id} + '/edit'}">수정</a>
+			
+			<form th:action="@{'/admin/products/' + ${product.id} + (product.isActive ? '/deactivate' : '/activate')}" method="post" style="display:inline;">
+				<button type="submit" th:text="${product.isActive ? '비활성화' : '활성화'}"></button>
+			</form>
+		</td>
+	</tr>
+	</tbody>
+</table>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>상품 목록</title>
+</head>
+<body>
+
+<h1>상품 목록</h1>
+
+<div th:each="product : ${products}" style="margin-bottom: 30px;">
+    <a th:href="@{'/products/' + ${product.id}}">
+        <!-- 첫 번째 이미지 썸네일로 표시 -->
+        <img th:if="${!product.images.isEmpty()}"
+             th:src="@{${product.images[0].imageUrl}}"
+             alt="썸네일" width="150" height="150"/>
+        <h3 th:text="${product.name}">상품명</h3>
+        <p th:text="${product.price + '원'}"></p>
+        <p th:text="${product.description}"></p>
+    </a>
+</div>
+
+</body>
+</html>

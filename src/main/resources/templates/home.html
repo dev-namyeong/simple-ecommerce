@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
+<head>
+	<meta charset="UTF-8">
+	<title>홈</title>
+</head>
+<body>
+<h2>쇼핑몰 홈페이지입니다</h2>
+
+<!-- 로그인한 사용자 -->
+<p sec:authorize="isAuthenticated() and !hasAuthority('ROLE_ANONYMOUS')">
+	환영합니다, <span th:text="${userName}"></span> 님!
+</p>
+
+<!-- ✅ 관리자 전용 메뉴 -->
+<div sec:authorize="hasRole('ADMIN')">
+	<a href="/admin/products"><button>관리자 상품 관리</button></a>
+</div>
+
+<!-- 비로그인 사용자 -->
+<div sec:authorize="isAnonymous() or hasAuthority('ROLE_ANONYMOUS')">
+	<a href="/user/login"><button>로그인</button></a>
+	<a href="/user/signup"><button>회원가입</button></a>
+</div>
+
+<!-- 로그아웃 버튼 -->
+<form sec:authorize="isAuthenticated() and !hasAuthority('ROLE_ANONYMOUS')" action="/logout" method="post">
+	<button type="submit">로그아웃</button>
+</form>
+</body>
+</html>

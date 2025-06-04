@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>카테고리 등록</title>
+</head>
+<body>
+<h2>카테고리 등록</h2>
+
+<!-- 에러 메시지 -->
+<div th:if="${error}" style="color:red;" th:text="${error}"></div>
+
+<form action="/admin/categories" method="post">
+    <div>
+        <label>카테고리 이름</label>
+        <input type="text" name="name" required />
+    </div>
+    <div>
+        <label>상위 카테고리 (선택)</label>
+        <select name="parentId">
+            <option value="">없음 (최상위)</option>
+            <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}"></option>
+        </select>
+    </div>
+    <div>
+        <label>정렬 순서</label>
+        <input type="number" name="sortOrder" value="0" />
+    </div>
+    <button type="submit">등록</button>
+</form>
+
+<a href="/admin/categories">카테고리 목록</a>
+</body>
+</html>

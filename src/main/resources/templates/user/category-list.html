@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>카테고리 목록</title>
+</head>
+<body>
+<h2>카테고리 목록</h2>
+
+<a href="/admin/categories/new">+ 카테고리 등록</a>
+
+<ul>
+    <li th:each="cat : ${categories}">
+        <span th:text="${cat.name}"></span>
+        <ul>
+            <li th:each="child : ${cat.children}" th:text="${child.name}"></li>
+        </ul>
+    </li>
+</ul>
+
+</body>
+</html>

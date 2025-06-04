@@ -1,0 +1,57 @@
+# ========================
+# 💾 빌드/컴파일 관련 무시
+# ========================
+/build/
+/target/
+/out/
+!.mvn/wrapper/maven-wrapper.jar
+
+# ========================
+# 🔧 IDE 관련 무시
+# ========================
+# IntelliJ
+.idea/
+*.iml
+*.iws
+*.ipr
+
+# VSCode
+.vscode/
+
+# STS / Eclipse
+.apt_generated/
+.classpath
+.factorypath
+.project
+.settings/
+.springBeans
+bin/
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+
+# ========================
+# 📄 설정 파일 (보안 민감 정보)
+# ========================
+# application.yml 무시 (비밀번호 포함)
+src/main/resources/application.yml
+
+# 로그파일
+*.log
+
+# ========================
+# 🧪 테스트 관련 (optional)
+# ========================
+test-output/
+.gradle/
+build/
+
+# ========================
+# 🍃 OS 파일 무시
+# ========================
+.DS_Store
+Thumbs.db

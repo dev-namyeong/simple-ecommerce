@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>회원가입</title>
+	<style>
+		.error { color: red; font-size: 0.9em; }
+		.success { color: green; font-size: 0.9em; }
+	</style>
+	<script defer src="/js/signup.js"></script> <!-- ✅ JS 따로 분리해서 연결 -->
+</head>
+<body>
+<h2>회원가입</h2>
+
+<form th:action="@{/user/signup}" method="post" th:object="${userDto}" onsubmit="return validateForm();">
+	<label>이메일:</label>
+	<input type="text" th:field="*{email}" id="email" required/>
+	<button type="button" onclick="checkEmail()">중복 확인</button>
+	<div id="email-error" class="error"></div>
+	<div id="email-check-result" class="error"></div>
+	
+	<br><label>비밀번호:</label>
+	<input type="password" th:field="*{password}" id="password" required/>
+	<div id="password-error" class="error"></div>
+	
+	<br><label>비밀번호 확인:</label>
+	<input type="password" id="confirmPassword" required/>
+	<div id="confirm-error" class="error"></div>
+	
+	<br><label>이름:</label>
+	<input type="text" th:field="*{name}" required/><br><br>
+	
+	<button type="submit">가입하기</button>
+</form>
+</body>
+</html>

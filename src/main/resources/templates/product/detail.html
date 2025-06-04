@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>상품 상세</title>
+</head>
+<body>
+
+<h1 th:text="${product.name}">상품명</h1>
+<p th:text="${product.price + '원'}">가격</p>
+<p th:text="${product.description}">설명</p>
+
+<div th:each="img : ${product.images}">
+    <img th:src="@{${img.imageUrl}}" alt="상품 이미지" width="200" height="200"/>
+</div>
+
+<a href="/products">목록으로</a>
+
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title th:text="${productId != null} ? '상품 수정' : '상품 등록'">상품 폼</title>
+</head>
+<body>
+
+<h2 th:text="${productId != null} ? '상품 수정' : '상품 등록'">상품 폼</h2>
+
+<form th:action="@{${productId != null} ? '/admin/products/' + ${productId} + '/edit' : '/admin/products'}"
+      th:object="${productForm}"
+      method="post"
+      enctype="multipart/form-data">
+	
+	<div>
+		<label>상품명</label>
+		<input type="text" th:field="*{name}" />
+		<div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+	</div>
+	
+	<div>
+		<label>설명</label>
+		<textarea th:field="*{description}"></textarea>
+		<div th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></div>
+	</div>
+	
+	<div>
+		<label>가격</label>
+		<input type="number" th:field="*{price}" />
+		<div th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></div>
+	</div>
+	
+	<div>
+		<label>재고</label>
+		<input type="number" th:field="*{stock}" />
+		<div th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></div>
+	</div>
+	
+	<!-- 이미지 업로드 영역 -->
+	<div>
+		<label>상품 이미지 업로드</label>
+		<input type="file" name="imageFiles" multiple />
+	</div>
+	
+	<!-- 수정일 때 기존 이미지 미리보기 -->
+	<div th:if="${productId != null}">
+		<p>등록된 이미지</p>
+		<div th:each="image : ${productImages}">
+			<img th:src="@{${image.imageUrl}}" alt="이미지" width="100" height="100"/>
+		</div>
+	</div>
+	
+	<div>
+		<button type="submit" th:text="${productId != null} ? '수정하기' : '등록하기'">제출</button>
+		<a href="/admin/products">목록으로</a>
+	</div>
+</form>
+</body>
+</html>
